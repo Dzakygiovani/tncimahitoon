@@ -6,7 +6,7 @@ import { defineConfig, loadEnv } from 'vite';
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, '.', '');
   return {
-    base: '/tncimahitoon/', // Ini baris yang paling penting buat GitHub Pages
+    base: '/tncimahitoon/', // Ini "obat" buat layar putihnya
     plugins: [react(), tailwindcss()],
     define: {
       'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),
