@@ -1,14 +1,15 @@
 import { Link, useLocation } from 'react-router-dom';
-import { BookOpen, User, Shield } from 'lucide-react';
+import { BookOpen, User, Shield, LogOut } from 'lucide-react';
 
 interface NavbarProps {
   user: {
     role: string;
     email: string;
   };
+  onLogout?: () => void;
 }
 
-export default function Navbar({ user }: NavbarProps) {
+export default function Navbar({ user, onLogout }: NavbarProps) {
   const location = useLocation();
 
   const isActive = (path: string) => location.pathname === path ? 'border-b-2 border-white pb-1' : 'hover:text-blue-300 transition-colors';
@@ -38,10 +39,21 @@ export default function Navbar({ user }: NavbarProps) {
             </Link>
           )}
           <Link to="/about" className={isActive('/about')}>About Us</Link>
-          <Link to="/profile" className="bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded-full flex items-center space-x-2 transition-colors shadow-sm">
-            <User size={18} />
-            <span>Profile</span>
-          </Link>
+          <div className="flex items-center space-x-3 ml-4 border-l border-blue-700 pl-6">
+            <Link to="/profile" className="bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded-full flex items-center space-x-2 transition-colors shadow-sm">
+              <User size={18} />
+              <span>Profile</span>
+            </Link>
+            {onLogout && (
+              <button 
+                onClick={onLogout}
+                className="bg-red-500/10 hover:bg-red-500 text-red-200 hover:text-white p-2 rounded-full transition-colors"
+                title="Keluar"
+              >
+                <LogOut size={18} />
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </nav>

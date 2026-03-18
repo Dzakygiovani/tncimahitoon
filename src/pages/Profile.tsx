@@ -1,8 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Shield, User, Mail, Award } from 'lucide-react';
+import { Shield, User, Mail, Award, LogOut } from 'lucide-react';
 
-export default function Profile({ user }: { user: any }) {
+export default function Profile({ user, onLogout }: { user: any, onLogout?: () => void }) {
   return (
     <div className="container mx-auto px-4 py-12 max-w-4xl">
       <motion.div 
@@ -21,10 +21,20 @@ export default function Profile({ user }: { user: any }) {
             </div>
             
             <h1 className="text-3xl font-black text-slate-800 mb-2">{user.role === 'admin' ? 'Administrator' : 'Siswa SMA TN'}</h1>
-            <div className="flex items-center justify-center gap-2 text-slate-500 font-medium">
+            <div className="flex items-center justify-center gap-2 text-slate-500 font-medium mb-8">
               <Mail size={16} />
               {user.email}
             </div>
+
+            {onLogout && (
+              <button 
+                onClick={onLogout}
+                className="inline-flex items-center justify-center gap-2 bg-red-50 text-red-600 hover:bg-red-100 px-6 py-3 rounded-xl font-bold transition-colors"
+              >
+                <LogOut size={18} />
+                Keluar dari Akun
+              </button>
+            )}
           </div>
         </div>
 
